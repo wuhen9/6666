@@ -1,3 +1,4 @@
 theme: jekyll-theme-cayman
 title: Wuheng's homepage
 description: There is no end to learning.
+markdown: kramdown
