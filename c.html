@@ -1,0 +1,392 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>Use_C</title></head>
+<body><h2>1. 程序设计和C语言</h2>
+<pre><code class='language-c' lang='c'>#include &lt;stdio.h&gt;
+int main()
+{
+    while(*s++=*t++){} //的作用是复制字符串
+    // a.c -编译成二进制-&gt; a.obj -连接库函数-&gt; a.exe 
+    
+    printf(&quot;Hello World!&quot;); // 单行注释 （早期 C89 不支持）
+    return 0;               /* 块注释 编译时变成一个空格
+                               都支持 */    
+}
+</code></pre>
+<p>&nbsp;</p>
+<h2>2. 算法</h2>
+<pre><code class='language-c' lang='c'>/* 求最大公约数（辗转相除法），用除数除以余数，当余数为0，除数为最大公约数。
+   求最小公倍数，两数相乘除以最大公约数。
+   求方程的近似根（牛顿迭代法），x_(n+1) = (x_n + a/x_n) / 2
+               （二分法），取区间的中点，
+   排序（选择法），
+      （冒泡法）
+*/
+// 闰年：能被4整除，但不能被100整除 和 能被400整除的年份都是闰年。
+// 素数：用 n 分别除以 2~n/2（或者2~sqrt(n)），都不能整除则为素数。
+// 三角形面积：area = sqrt(s*(s-a)*(s-b)*(s-c))，s=(a+b+c)/2
+
+</code></pre>
+<p>&nbsp;</p>
+<h2>3. 最简单的C程序设计一顺序程序设计</h2>
+<ol start='' >
+<li><p><strong>常量</strong></p>
+<ol start='' >
+<li><p>整型常量：101、0、-1</p>
+</li>
+<li><p>实型常量：</p>
+<ol start='' >
+<li>十进制小数形式：3.14、0.0、-9.0</li>
+<li>指数形式：11.5e-3（11.5×10^(-3)）（可用e / E，e之前必须有数字，后面必须为整数）</li>
+
+</ol>
+</li>
+<li><p>字符常量：</p>
+<ol start='' >
+<li>普通字符：&#39;a&#39;、&#39;Z&#39;、&#39;3&#39;、&#39;?&#39;（一个字符，以ASCII码存储，&#39;A&#39;=65 &#39;a&#39;=97 &#39;1&#39;=49）</li>
+<li>转义字符：<img src="https://s1.ax1x.com/2022/04/12/Le9FOK.png" referrerpolicy="no-referrer" alt="Le9FOK.png"></li>
+
+</ol>
+</li>
+<li><p>字符串常量：&quot;boy&quot;、&quot;456&quot;</p>
+</li>
+<li><p>符号常量：<code>#define PI 3.14</code> （不占内存，预编译后符号消失）</p>
+</li>
+
+</ol>
+</li>
+<li><p><strong>变量</strong>：从变量中取值，实际上是通过变量名找到相应的内存地址，从该存储单元中读取数据。</p>
+<ol start='' >
+<li><p>整型：<strong>int (2/4字节)</strong>、<strong>short (2字节)</strong>、<strong>long (4字节)</strong>、long long (8字节)、<strong>char (1字节)</strong>、bool</p>
+<blockquote><p>以补码形式存放，负数补码为绝对值的按位取反再加一</p>
+<p>2字节的范围为-2^15 ~ 2^15-1，-32768~32767，无符号则为0~65535（2^16-1）</p>
+<p>int a = sizeof(short); a= 2</p>
+<p>整形、字符型变量前可加 <code>unsigned</code> 表示无符号，不加前面默认带有 <code>signed</code> ，使用 %u 输出</p>
+</blockquote>
+</li>
+<li><p>浮点型：<strong>float (4字节，%f)</strong>、<strong>double (8字节，%lf)</strong>、float_complex,double_complex,long long_complex</p>
+<blockquote><p>float 6位有效数字，double 15位有效数字，C编译系统把浮点型常量都按双精度处理</p>
+</blockquote>
+</li>
+<li><p>派生类型：<strong>指针（*）</strong>、<strong>数组（[]）</strong>、结构体（struct）、共同体（union）、函数</p>
+</li>
+<li><p>枚举（enum）、空（void）</p>
+</li>
+
+</ol>
+</li>
+<li><p><strong>常变量</strong>：<strong>const</strong> float pi = 3.14;</p>
+</li>
+<li><p><strong>标识符</strong>：只能<strong>数字</strong>、<strong>字母</strong>、<strong>下划线</strong>组合，第一个字符<strong>不能为数字</strong>。</p>
+</li>
+
+</ol>
+<p><strong>C 运算符</strong>：</p>
+<ol start='' >
+<li><p><strong>算数运算符</strong>：+  -  *  /  %  ++  --</p>
+<blockquote><p>a+++b = (a++)+b</p>
+<p>算术运算符是自左至右，赋值运算符是自右至左</p>
+</blockquote>
+</li>
+<li><p><strong>关系运算符</strong>：&gt;  &lt;  ==  &gt;=  &lt;=  !=</p>
+</li>
+<li><p><strong>逻辑运算符</strong>：!（逻辑非）  &amp;&amp;（逻辑与）  ||（逻辑或）</p>
+<blockquote><p>数值1代表真，0代表假，</p>
+<p>a &amp;&amp; b &amp;&amp; c 只有a≠0（a为真），才继续进行右面的运算</p>
+<p>a || b || c 只有a=0（a为假），才继续进行其右面的运算</p>
+</blockquote>
+</li>
+<li><p><strong>位运算符</strong>：&lt;&lt;  &gt;&gt;  ~  |  ^  &amp;</p>
+</li>
+<li><p>赋值运算符：=</p>
+<blockquote><p>将一个占字节多的整型数据赋给一个占字节少的整型变量或字符变量（例如把int型数据赋给short或char变量）时</p>
+<p>只将其低字节原封不动地送到被赋值的变量（即发生“截断”）。例如:</p>
+<p>int a = 511; char c = a; 则c为-1 unsigned char d = a; 则d为255</p>
+</blockquote>
+</li>
+<li><p>条件运算符：?:</p>
+</li>
+<li><p>逗号运算符：,</p>
+</li>
+<li><p><strong>指针运算符</strong>：*  &amp;</p>
+</li>
+<li><p>求字节数运算符：sizeof</p>
+</li>
+<li><p>强制类型转换运算符：(类型)</p>
+</li>
+<li><p>成员运算符：.  -&gt;</p>
+</li>
+<li><p>下标运算符：[]</p>
+</li>
+<li><p>其他：如函数调用</p>
+</li>
+
+</ol>
+<p><strong>C语句</strong>：</p>
+<ol start='' >
+<li><p>控制语句</p>
+<ol start='' >
+<li>if(){} else {}</li>
+<li>for(){}</li>
+<li>while(){}</li>
+<li>do{}while(){}</li>
+<li><strong>continue</strong> <strong>结束本次循环</strong></li>
+<li><strong>break</strong> <strong>中止switch、循环语句</strong></li>
+<li>switch</li>
+<li>return</li>
+<li>goto 转向语句</li>
+
+</ol>
+</li>
+<li><p>函数调用语句：printf(&quot;Hello C!&quot;);</p>
+</li>
+<li><p>表达式语句：i = i + 1;</p>
+</li>
+<li><p>空语句：; （只有一个分号）</p>
+</li>
+<li><p>复合语句：{}（括号括起来）</p>
+</li>
+
+</ol>
+<p><strong>存储区</strong>：</p>
+<ol start='' >
+<li>程序区</li>
+<li>静态存储区：全局变量</li>
+<li>动态存储区：形参、auto 变量、函数调用时的现场保护和返回地址</li>
+
+</ol>
+<p><strong>C 存储类别</strong>：</p>
+<ol start='' >
+<li>自动的（auto，动态存储区，默认的）</li>
+<li>静态的（statis，静态存储区）</li>
+<li>寄存器的（register，CPU中的寄存器）</li>
+<li>外部的（extern）</li>
+
+</ol>
+<h2>4. 选择结构</h2>
+<h2>5. 循环结构</h2>
+<pre><code class='language-c' lang='c'>#include &lt;stdio.h&gt;
+int main(){
+    int a,b,i=1,sum=0;
+    for(a=6,b=7;(c=getchar())!=&#39;\n&#39;;i++,sum+=i)
+    {
+        print(&quot;%c&quot;,c);
+    }
+    return 0;
+}
+</code></pre>
+<p>&nbsp;</p>
+<h2>6. 数组</h2>
+<pre><code class='language-c' lang='c'>#include &lt;stdio.h&gt;
+int main()
+{
+    int a[3]; // 等价于 int a[]={0,0,0};
+    char b[3]; // 等价于 char b[]={&#39;\0&#39;,&#39;\0&#39;,&#39;\0&#39;};
+    int *c[3]; // 等价于 int *c[]={NULL,NULL,NULL};
+    int a[2][3]; // 等价于 int a[][3]={0,0,0,0,0,0};
+}
+</code></pre>
+<p>&nbsp;</p>
+<h2>7. 函数</h2>
+<pre><code class='language-c' lang='c'>#include &lt;stdio.h&gt;
+int main()
+{
+    printf(&quot;%f&quot;,1.0/3); // 0.3333
+    scanf(&quot;a=%f&quot;,&amp;a); // 输入&quot;a=3.14&quot;
+    putchar(&#39;B&#39;);
+    getchar(); // 输入一个字符
+    
+    // # include &lt;string.h&gt;
+    puts(str); // 输出字符串函数
+    gets(str); // 输入字符串函数，返回字符数组str的第一个元素的地址
+    
+    strcat(str1,str2); // 字符串连接函数，将str2拼接到str1的后面，返回字符数组str1的地址
+    strcpy(str1,str2); // 字符串复制函数，将str2复制到str1里面，str2可以为字符串常量
+    strncpy(str1,str2,n); // 字符串复制函数，将str2前n个字符复制到str1里面
+    int a = strcmp(str1,str2); // 字符串比较函数，str1&gt;str2为正整数，反之负整数或0
+    int lengh = strlen(str1); // 字符串长度，不包括 &#39;\0&#39;
+    strlwr(str1); // 字符串转换小写
+    strupr(str1); // 字符串转换大写
+    
+}
+</code></pre>
+<p>&nbsp;</p>
+<h2>8. 指针</h2>
+<p><a href='https://blog.csdn.net/gjggj/article/details/106998697' target='_blank' class='url'>https://blog.csdn.net/gjggj/article/details/106998697</a></p>
+<p>输出：*pointer_1; （*为指向）</p>
+<ol start='' >
+<li>&amp; 取地址运算符：&amp;a 是变量 a 的地址</li>
+<li>* 指针运算符（间接访问运算符）：*p 是指针变量 p 指向的对象</li>
+
+</ol>
+<pre><code class='language-c' lang='c'>#include &lt;stdio.h&gt;
+int main()
+{	
+    int a = 10, *pointer_1; // 定义指针变量 void *p 空指针类型
+ 	pointer_1 = &amp;a; // （*pointer_1 = a;）指向变量
+ 	printf(&quot;%d&quot;, *pointer_1);
+ 
+    // 指针引用数组
+    int a[] = {1,2,3,4,5,6};
+    int *p = a; // 或者 int *p = &amp;a[0]; &lt;=&gt; int *p; p = a;/p = &amp;a[0];
+    
+    // 指针指向数组元素的时候，才对指针进行加和减的运算。
+    int *p = a; // 此时 a[i] &lt;=&gt; *(a+i) &lt;=&gt; *(p+i) 
+    // 地址之差 / 数据类型字节数 = 数组元素相差元素个数
+    // *p++ = *(p++)
+    
+    // 指针引用多维数组
+    // a+1 = &amp;a[1] = a[1] = *(a+1) = a[1][0]的地址
+ 	// a[1]+2 = *(a+1)+2 = &amp;a[1][2] = a[1][2]的地址 
+    // *(a+1)+2 = *(*(a+1)+2) = a[1][2] = a[1][2]的元素值
+    
+    int max(int,int);
+    int (*p)(int,int); // 定义指向函数的指针变量p
+    p = max;
+    // (*p)(a,b) &lt;=&gt; max(a,b)
+    
+    // 8.5.4 指向函数的指针 作 函数参数 void fun(int x,int y,int (*p)(int,int))
+    // 8.6 返回指针值 的 函数 int *fun(int,int)
+    // 8.7 指针数组
+    char *name[] = {&quot;aa&quot;,&quot;bb&quot;,&quot;cc&quot;};
+    // 多重指针
+    
+    int a = 3,b = 5;
+    int pointer_1, pointer_2;
+    pointer_1 = &amp;a; pointer_2 = &amp;b;
+    void swap1(int *p1,int *p2) {
+        int temp;						    // 正确，数据是单向的“值传递”
+        temp = *p1; *p1 = *p2; *p2 = temp;  // 只能改变实参针变量所指变量的值。
+    }
+    void swap2(int *p1,int *p2) {
+        int *p;
+        p = p1; p1 = p2; p2 = p; // 错误
+    }
+    void swap3(int p1,int p2) {
+        int temp;
+        temp = p1; p1 = p2; p2 = temp; // 错误
+    }
+    
+    // 动态内存分配
+    malloc(100); // 开辟100字节的临时分配域,函数值为其第1个字节的地址
+    p=calloc(50,4); // 开辟50X4个字节的临时分配域,把首地址赋给指针变量p
+    realloe(p,50); // 将p所指向的已分配的动态空间改为50字节
+    free(p); // 释放指针变量p所指向的已分配的动态空间
+
+ 	return 0;
+}
+</code></pre>
+<blockquote><p>指针 = 地址 = &amp;a</p>
+<p>指针变量 = 存放地址的变量 = int *p</p>
+<p>数组名、函数名、数组名传递给形参（函数） = 地址/指针</p>
+</blockquote>
+<h2>9. 建立自己的数据结构</h2>
+<p><a href='https://blog.csdn.net/gjggj/article/details/106999409' target='_blank' class='url'>https://blog.csdn.net/gjggj/article/details/106999409</a></p>
+<pre><code class='language-c' lang='c'>#include &lt;stdio.h&gt;
+int main()
+{
+	struct Student {
+        int num;
+        char name[20];
+    }stu[3]={101,&quot;Wu La&quot;,102,&quot;Xi La&quot;,103,&quot;Gi La&quot;};
+    
+    struct Student stu2={.name=&quot;Li Si&quot;};
+    struct Student stu3,stu4;
+    printf(&quot;%d&quot;,stu1.num);
+    
+    // 结构体指针 struct Student stu; p = &amp;stu;
+    struct Student *p;
+    stu.name &lt;=&gt; (*p).name &lt;=&gt; p-&gt;name;
+    
+    // 链表基本结构
+    struct Student {
+        int num;
+        float score;
+        struct Student *next;
+    };
+    struct Student st1,st2,st3; // 对st1等赋值...
+    st1.next = &amp;st2;
+    st2.next = &amp;st3; 
+    st3.next = NULL;
+    for(struct Student *p=&amp;st1; p!=NULL; p=p-&gt;next){
+        printf(&quot;%d %f\n&quot;,p-&gt;num,p-&gt;score);
+    }
+    
+    // 共用体
+    union Data {
+        int i;
+        char ch;
+        float f;
+    }a,b,c; // 在声明类型同时定义变量
+    // 枚举
+    enum Weekday {sun, mon, tue , wed, thu, fri, sat}; // sun=0,...sat=6
+
+    // 新类型名
+    typedef int Integer; //指定用Integer为类型名，作用与int相同
+    // 用新类型名代表原来的类型：
+    // 按定义变量的方式，把变量名换上新类型名,并且在最前面加typedef。
+
+    // 1. 代表结构体类型
+    typedef struct {...} Date;
+    Date brithday; // 定义结构体类型变量birthday,不用加struct
+    Date *p; // 定义结构体指针变量p,指向此结构体类型数据
+    // 2. 代表数组类型
+    typedef int Num[100]; // 声明Num为整型数组类型名
+	Num a; // 定义 a为整型数组名,它有100个元素.
+    // 3. 代表指针类型
+	typedef char * String; // 声明String为字符指针类型
+	String p,s[10]; // 定义p为字符指针变量,s为字符指针数组
+    // 4. 代表指向函数的指针类型
+	typedef int (*Pointer)(); // 声明Pointer为指向丽数的指针类型
+	Pointer pl,p2; // pl,p2为Pointer类型的指针变量
+}
+</code></pre>
+<p>&nbsp;</p>
+<h2>10. 文件输入输出</h2>
+<p><a href='https://blog.csdn.net/gjggj/article/details/92250696' target='_blank' class='url'>https://blog.csdn.net/gjggj/article/details/92250696</a></p>
+<pre><code class='language-c' lang='c'>#include &lt;stdio.h&gt;
+int main()
+{
+    // 文件路径：&quot;D:\User\temp\a.txt&quot;
+    FILE *fp = fopen(&quot;a.txt&quot;,&quot;r&quot;);
+    ch = fgetc(fp); // 读取一个字符，失败返回文件结束标志EOF（-1）
+    fputc(ch,fp); // 把字符ch写入到文件中，失败返回文件结束标志EOF（-1）
+    
+    fgets(str,n,fp); // 读取n-1个字符到str中，失败返回NULL
+    fputs(str,fp); // 把str字符串写入文件，成功返回0，失败返回非0
+    
+    fprintf(fp,&quot;%d&quot;,i); // 将变量输出到文件中
+    fscanf(fp,&quot;%d&quot;,&amp;i); // 从文件中读取到变量
+    
+    // 二进制读写文件
+    char buffer[];
+    fread(buffer,size,count,fp); // 从文件中读取count个size字节的数据到buffer数组
+    fwrite(buffer,size,count,fp); // 将buffer数组中count个size字节的数据到写入到文件中
+    
+    rewind(fp); // 文件位置标记指向开头
+    fseek(fp,位移量,起始点); // 文件位置标记从起始点位移指定量（位移量为long型，负数向开头移）
+    // 开始 SEEK_SET 0、当前 SEEK_CUR 1、末尾 SEEK_END 2
+    long i = ftell(fp);
+    
+    ferror(fp); // 返回值：0未出错，非0出错
+    clearerr(); // 使文件出错标志和文件结束标志置为0
+    fclose(fp);
+}
+</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>ASCII 表</h3>
+<p><img src="https://www.asciitable.com/asciifull.gif" referrerpolicy="no-referrer" alt="img"></p>
+<h3>运算符和结合型</h3>
+<p><img src="C:\Users\30456\AppData\Roaming\Typora\typora-user-images\image-20220424190355792.png" referrerpolicy="no-referrer" alt="image-20220424190355792"></p>
+<p><img src="C:\Users\30456\AppData\Roaming\Typora\typora-user-images\image-20220424190545356.png" referrerpolicy="no-referrer" alt="image-20220424190545356"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="https://s1.ax1x.com/2022/04/12/LeVYz4.png" referrerpolicy="no-referrer" alt="LeVYz4.png"></p>
+<p><img src="https://s1.ax1x.com/2022/04/12/LeV2yd.png" referrerpolicy="no-referrer" alt="LeV2yd.png"></p>
+<p><img src="C:\Users\30456\AppData\Roaming\Typora\typora-user-images\image-20220424124827096.png" referrerpolicy="no-referrer" alt="image-20220424124827096"></p>
+<p><img src="C:\Users\30456\AppData\Roaming\Typora\typora-user-images\image-20220424153207860.png" referrerpolicy="no-referrer" alt="image-20220424153207860"></p>
+</body>
+</html>
